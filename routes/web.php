@@ -20,4 +20,10 @@ Route::prefix('/')->group(function () {
         return Inertia::render('Contact');
     })->name('contact');
 });
+
+Route::prefix('/dashboard')->middleware(['auth' , 'verified'])->group(function () {
+    Route::get('/' , function () {
+        return Inertia::render('Dashboard/Dashboard');
+    })->name('dashboard');
+});
 require __DIR__.'/auth.php';
