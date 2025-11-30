@@ -5,36 +5,19 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
-Route::get('/catalog', function () {
-    return Inertia::render('Catalog', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
-Route::get('/aboutus', function () {
-    return Inertia::render('AboutUs', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
-Route::get('/contact', function () {
-    return Inertia::render('Contact', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+
+Route::prefix('/')->group(function () {
+    Route::get('/', function () {
+        return Inertia::render('Welcome');
+    })->name('home');
+    Route::get('/catalog', function () {
+        return Inertia::render('Catalog');
+    })->name('catalog');
+    Route::get('/aboutus', function () {
+        return Inertia::render('AboutUs');
+    })->name('aboutus');
+    Route::get('/contact', function () {
+        return Inertia::render('Contact');
+    })->name('contact');
 });
 require __DIR__.'/auth.php';

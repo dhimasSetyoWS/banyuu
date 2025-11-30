@@ -1,43 +1,15 @@
+<script setup>
+// Import Navbar dari component
+import Navbar from '@/Components/Navbar.vue';
+
+// Import Footer dari component
+import Footer from '@/Components/Footer.vue';
+</script>
 <template>
 
-    <body class="bg-white text-slate-800 antialiased selection:bg-brand-100 selection:text-brand-900">
-
-        <nav
-            class="fixed w-full z-50 top-0 bg-white/80 backdrop-blur-md border-b border-slate-100 transition-all duration-300">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between items-center h-20">
-                    <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
-                        <img src="img/banuacourse-icon.png" alt="" width="120">
-                    </div>
-
-                    <div class="hidden md:flex space-x-8 items-center">
-                        <a href="#" class="text-sm font-medium text-slate-600 hover:text-brand-600 transition">Kelas</a>
-                        <a href="#"
-                            class="text-sm font-medium text-slate-600 hover:text-brand-600 transition">Mentor</a>
-                        <a href="#"
-                            class="text-sm font-medium text-slate-600 hover:text-brand-600 transition">Testimoni</a>
-                        <a href="#" class="text-sm font-medium text-slate-600 hover:text-brand-600 transition">Biaya</a>
-                    </div>
-
-                    <div class="hidden md:flex items-center gap-4">
-                        <a href="#" class="text-sm font-medium text-slate-600 hover:text-brand-600">Masuk</a>
-                        <a href="#"
-                            class="px-5 py-2.5 text-sm font-medium bg-brand-600 text-white rounded-full hover:bg-brand-900 transition shadow-lg shadow-brand-600/20">Daftar
-                            Gratis</a>
-                    </div>
-
-                    <div class="md:hidden flex items-center">
-                        <button class="text-slate-600 focus:outline-none">
-                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4 6h16M4 12h16M4 18h16" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </nav>
-
+    <div class="bg-white text-slate-800 antialiased selection:bg-brand-100 selection:text-brand-900">
+        <!-- Ubah navbar jadi component -->
+        <Navbar/>
         <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
                 <div class="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
@@ -50,7 +22,7 @@
                         </div>
                         <h1 class="text-4xl lg:text-6xl font-bold tracking-tight text-slate-900 leading-[1.15] mb-6">
                             Investasi Terbaik Adalah <span
-                                class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-purple-600">Pendidikanmu.</span>
+                                class="text-transparent bg-clip-text bg-linear-to-r from-brand-600 to-purple-600">Pendidikanmu.</span>
                         </h1>
                         <p class="text-lg text-slate-600 mb-8 leading-relaxed max-w-lg">
                             Akses ribuan materi pelajaran dari mentor ahli. Tingkatkan skill akademik dan non-akademik
@@ -115,7 +87,7 @@
             </div>
         </section>
 
-        <section class="border-y border-slate-100 bg-gradient-to-r from-brand-600 to-purple-600">
+        <section class="border-y border-slate-100 bg-linear-to-r from-brand-600 to-purple-600">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-white">
                     <div>
@@ -288,7 +260,7 @@
         <section class="py-20 bg-slate-900 text-white rounded-t-[3rem] mt-10">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-2xl mx-auto mb-16">
-                    <h2 class="text-3xl font-bold mb-4">Kenapa Memilih EduLarn?</h2>
+                    <h2 class="text-3xl font-bold mb-4">Kenapa Memilih Banua Kursus ?</h2>
                     <p class="text-slate-400">Kami fokus pada pengalaman belajar yang efektif dan menyenangkan.</p>
                 </div>
 
@@ -332,55 +304,10 @@
             </div>
         </section>
 
-        <footer class="bg-slate-900 text-slate-300 py-12 border-t border-slate-800">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                    <div class="col-span-1 md:col-span-1">
-                        <div class="flex items-center gap-2 mb-4">
-                            <div
-                                class="w-6 h-6 bg-brand-600 rounded flex items-center justify-center text-white font-bold text-xs">
-                                E</div>
-                            <span class="font-bold text-lg text-white">EduLarn.</span>
-                        </div>
-                        <p class="text-sm text-slate-500">Platform belajar online terpercaya untuk masa depan yang lebih
-                            cerah.</p>
-                    </div>
+        <!-- Ubah footer jadi component -->
+        <Footer/>
 
-                    <div>
-                        <h4 class="text-white font-semibold mb-4">Kategori</h4>
-                        <ul class="space-y-2 text-sm">
-                            <li><a href="#" class="hover:text-white transition">Web Development</a></li>
-                            <li><a href="#" class="hover:text-white transition">UI/UX Design</a></li>
-                            <li><a href="#" class="hover:text-white transition">Data Science</a></li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h4 class="text-white font-semibold mb-4">Perusahaan</h4>
-                        <ul class="space-y-2 text-sm">
-                            <li><a href="#" class="hover:text-white transition">Tentang Kami</a></li>
-                            <li><a href="#" class="hover:text-white transition">Karir</a></li>
-                            <li><a href="#" class="hover:text-white transition">Hubungi Kami</a></li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h4 class="text-white font-semibold mb-4">Berlangganan</h4>
-                        <form class="flex gap-2">
-                            <input type="email" placeholder="Email kamu..."
-                                class="bg-slate-800 border-none rounded-lg px-4 py-2 text-sm w-full focus:ring-1 focus:ring-brand-600">
-                            <button
-                                class="bg-brand-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-brand-700 transition">Kirim</button>
-                        </form>
-                    </div>
-                </div>
-                <div class="border-t border-slate-800 mt-12 pt-8 text-center text-xs text-slate-600">
-                    &copy; 2023 EduLarn Inc. All rights reserved.
-                </div>
-            </div>
-        </footer>
-
-    </body>
+    </div>
 </template>
 
 
