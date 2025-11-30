@@ -8,7 +8,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post("/login");
+    form.post(route('login'));
 }
 </script>
 <template>
@@ -29,7 +29,7 @@ const submit = () => {
                         </p>
                     </div>
 
-                    <form @submit="submit" class="space-y-6">
+                    <form @submit.prevent="submit" class="space-y-6">
                         <div>
                             <label for="email" class="block text-sm font-medium text-slate-700">Alamat Email</label>
                             <div class="mt-1">

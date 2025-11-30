@@ -10,7 +10,7 @@ const form = useForm({
 })
 
 function submit() {
-    form.post("/register");
+    form.post(route('register'));
 }
 </script>
 <template>
@@ -28,7 +28,7 @@ function submit() {
                         <h1 class="text-2xl font-bold">Daftar Sekarang</h1>
                     </div>
 
-                    <form @submit="submit" class="space-y-6">
+                    <form @submit.prevent="submit" class="space-y-6">
                         <div class="flex space-x-2">
                             <div class="w-1/2">
                                 <label for="name" class="block text-sm font-medium text-slate-700">Nama Lengkap</label>
