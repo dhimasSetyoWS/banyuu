@@ -7,10 +7,7 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between items-center h-20">
                     <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
-                        <div
-                            class="w-8 h-8 bg-brand-600 rounded-lg flex items-center justify-center text-white font-bold">
-                            E</div>
-                        <span class="font-bold text-xl tracking-tight text-slate-900">EduLarn.</span>
+                        <img src="img/banuacourse-icon.png" alt="" width="120">
                     </div>
 
                     <div class="hidden md:flex space-x-8 items-center">
@@ -118,24 +115,24 @@
             </div>
         </section>
 
-        <section class="border-y border-slate-100 bg-slate-50/50">
+        <section class="border-y border-slate-100 bg-gradient-to-r from-brand-600 to-purple-600">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-white">
                     <div>
-                        <p class="text-3xl font-bold text-slate-900">120+</p>
-                        <p class="text-sm text-slate-500 mt-1">Kelas Online</p>
+                        <p class="text-3xl font-bold">120+</p>
+                        <p class="text-sm text-slate-800 mt-1">Kelas Online</p>
                     </div>
                     <div>
-                        <p class="text-3xl font-bold text-slate-900">50+</p>
-                        <p class="text-sm text-slate-500 mt-1">Mentor Ahli</p>
+                        <p class="text-3xl font-bold">50+</p>
+                        <p class="text-sm text-slate-800 mt-1">Mentor Ahli</p>
                     </div>
                     <div>
-                        <p class="text-3xl font-bold text-slate-900">15k</p>
-                        <p class="text-sm text-slate-500 mt-1">Alumni</p>
+                        <p class="text-3xl font-bold">15k</p>
+                        <p class="text-sm text-slate-800 mt-1">Alumni</p>
                     </div>
                     <div>
-                        <p class="text-3xl font-bold text-slate-900">4.9</p>
-                        <p class="text-sm text-slate-500 mt-1">Rating Rata-rata</p>
+                        <p class="text-3xl font-bold">4.9</p>
+                        <p class="text-sm text-slate-800 mt-1">Rating Rata-rata</p>
                     </div>
                 </div>
             </div>
