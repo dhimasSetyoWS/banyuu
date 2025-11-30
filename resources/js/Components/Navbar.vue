@@ -1,5 +1,5 @@
 <script setup>
-import { Link } from '@inertiajs/vue3';
+import { Link, usePage } from '@inertiajs/vue3';
 const links = [
     {
         text : "Home",
@@ -22,6 +22,8 @@ const links = [
         active : "contact",
     }
 ]
+
+const user = usePage().props.auth.user;
 </script>
 <template>
     <Head title="Home"/>
@@ -42,10 +44,15 @@ const links = [
                 </div>
 
                 <div class="hidden md:flex items-center gap-4">
-                    <Link :href="route('login')" class="text-sm font-medium text-slate-600 hover:text-brand-600">Masuk</Link>
-                    <Link :href="route('register')"
-                        class="px-5 py-2.5 text-sm font-medium bg-brand-600 text-white rounded-full hover:bg-brand-900 transition shadow-lg shadow-brand-600/20">Daftar
-                        Gratis</Link>
+                    <template v-if="!user">
+                        <Link :href="route('login')" class="text-sm font-medium text-slate-600 hover:text-brand-600">Masuk</Link>
+                        <Link :href="route('register')"
+                            class="px-5 py-2.5 text-sm font-medium bg-brand-600 text-white rounded-full hover:bg-brand-900 transition shadow-lg shadow-brand-600/20">Daftar
+                            Gratis</Link>
+                    </template>
+                    <template v-else>
+                        <Link :href="route('dashboard')" class="text-sm font-semibold text-slate-600 hover:text-brand-600">Dashboard</Link>
+                    </template>
                 </div>
 
                 <div class="md:hidden flex items-center">
