@@ -1,17 +1,18 @@
 @import "tailwindcss";
-
 @plugin '@tailwindcss/forms';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 
+/* Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 @theme {
-    --font-sans: Figtree, ui-sans-serif, system-ui, sans-serif,
-        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-        "Noto Color Emoji";
     /* Menambahkan Warna Custom 'brand' */
+    --font-sans: "Inter", 'Figtree', sans-serif;
     --color-brand-50: #eef2ff;
     --color-brand-100: #e0e7ff;
     --color-brand-600: #4f46e5;
+    --color-brand-700: #4338ca;
     --color-brand-900: #312e81;
 }
 
