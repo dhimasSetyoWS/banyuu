@@ -51,7 +51,7 @@ const user = usePage().props.auth.user;
                             Gratis</Link>
                     </template>
                     <template v-else>
-                        <Link :href="route('dashboard')" class="text-sm font-semibold text-slate-600 hover:text-brand-600">Dashboard</Link>
+                        <Link :href="user.role == 'teacher' ? route('teacher.dashboard') : route('dashboard')" class="text-sm font-semibold text-slate-600 hover:text-brand-600">Dashboard</Link>
                     </template>
                 </div>
 
