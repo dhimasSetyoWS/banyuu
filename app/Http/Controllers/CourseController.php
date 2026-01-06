@@ -58,12 +58,11 @@ class CourseController extends Controller
             'description'  => $validated['description'],
             'price'        => $validated['price'],
             'kategori_id'  => $validated['kategori_id'],
-            'period_id'    => $validated['period_id'],
-            'user_id'      => auth()->user()->id(), // Ambil ID user yang sedang login
+            'user_id'      => auth()->user()->id, // Ambil ID user yang sedang login
         ]);
 
         // 4. Redirect dengan Flash Message (untuk notifikasi di Vue)
-        return redirect()->route('courses.index')
+        return redirect()->route('teacher.dashboard.class.index')
             ->with('success', 'Kursus berhasil dibuat!');
     }
 

@@ -34,7 +34,10 @@ Route::prefix('/teacher/dashboard')->middleware(['auth' , 'verified' , 'role:tea
         return Inertia::render('Dashboard/Teacher/MainDashboard');
     })->name('teacher.dashboard');
     Route::get('/manage-class', function () {
-        return Inertia::render('Dashboard/Teacher/ManageClass');
+
+        return Inertia::render('Dashboard/Teacher/ManageClass' , [
+            'coursera' => auth()->user()->courses()->with('kategori')->get()
+        ]);
     })->name('teacher.dashboard.class.index');
     Route::get('/manage-class/create', [CourseController::class, 'create'])->name('teacher.dashboard.class.create');
     Route::get('/manage-class/edit', function () {
@@ -42,3 +45,4 @@ Route::prefix('/teacher/dashboard')->middleware(['auth' , 'verified' , 'role:tea
     })->name('teacher.dashboard.class.edit');
 });
 require __DIR__.'/auth.php';
+require __DIR__.'/service.php';

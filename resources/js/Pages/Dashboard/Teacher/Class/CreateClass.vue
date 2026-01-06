@@ -30,7 +30,6 @@ const form = useForm({
     description: '',
     price: 0,
     kategori_id: '', // foreignId ke kategori
-    period_id: '',   // foreignId ke periods
 });
 
 // 3. Auto Generate Slug dari Title
@@ -42,7 +41,7 @@ watch(() => form.title_course, (newTitle) => {
 });
 
 const submit = () => {
-    form.post(route('courses.store'));
+    form.post(route('course.store'));
 };
 </script>
 
@@ -86,10 +85,10 @@ const submit = () => {
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-2">Slug URL</label>
                             <div
-                                class="flex items-center bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-500 text-sm">
+                                class="flex items-center bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-500 text-xs">
                                 <span>domain.com/course/</span>
-                                <input v-model="form.slug" type="text"
-                                    class="bg-transparent border-none p-0 focus:ring-0 text-slate-900 ml-1 w-full font-medium">
+                                <input disabled v-model="form.slug" type="text"
+                                    class="bg-transparent border-none p-0 focus:ring-0 text-slate-900 ml-1 w-full font-medium cursor-not-allowed">
                             </div>
                             <p v-if="form.errors.slug" class="text-xs text-red-500 mt-1">{{ form.errors.slug }}</p>
                         </div>

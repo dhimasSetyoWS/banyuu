@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('description');
             $table->integer('price');
-            $table->foreignId('kategori_id')->nullable()->constrained()->onDelete('set null');
+            $table->foreignId('kategori_id')->nullable()->constrained('kategori')->onDelete('set null');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
