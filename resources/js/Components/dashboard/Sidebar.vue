@@ -25,9 +25,10 @@ const allLinks = [
     { icon: Squares2X2Icon, text: "Dashboard Utama", target: "dashboard", active: "dashboard", roles: ['student'] },
     { icon: Squares2X2Icon, text: "Dashboard Guru", target: "teacher.dashboard", active: "teacher.dashboard", roles: ['teacher'] },
     { icon: BookOpenIcon, text: "Manajemen Kelas", target: "teacher.dashboard.class.index", active: "teacher.dashboard.class.*", roles: ['teacher'] },
+    { icon: DocumentDuplicateIcon, text: "Pertanyaan", target: "teacher.dashboard.class.index", active: "teacher.dashboard.question", roles: ['teacher' , 'student'] },
     { icon: BookOpenIcon, text: "Kelas Saya", target: "dashboard.class.index", active: "dashboard.class.*", roles: ['student'] },
     { icon: ChatBubbleLeftEllipsisIcon, text: "Question", target: "dashboard", active: "home", roles: ['student'] },
-    { icon: NewspaperIcon, text: "Article", target: "dashboard", active: "home", roles: ['student', 'teacher']  },
+    { icon: NewspaperIcon, text: "Article", target: "dashboard", active: "home", roles: ['student']  },
     { icon: DocumentDuplicateIcon, text: "Assessment", target: "dashboard", active: "home", roles: ['student'] },
     // --- Simulasi Menu Tambahan (Bisa dihapus nanti) ---
     { icon: BookOpenIcon, text: "Riwayat Belajar", target: "dashboard", active: "home", roles: ['student'] },

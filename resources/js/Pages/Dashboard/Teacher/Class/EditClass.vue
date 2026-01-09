@@ -1,280 +1,141 @@
 <script>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 
+// Persistent Layout
 export default {
-    layout: (h, page) => h(AuthenticatedLayout, { header: 'Kelola Kursus' }, () => [page])
+    layout: (h, page) => h(AuthenticatedLayout,
+        {
+            title: 'Edit Detail Kursus',
+            header: 'Edit Detail Kursus'
+        },
+        () => [page]
+    )
 }
 </script>
 
 <script setup>
 import { Head, Link, useForm } from '@inertiajs/vue3';
-import { ref } from 'vue';
 import {
+    CalendarDaysIcon,
     PencilSquareIcon,
-    TrashIcon,
-    PlusIcon,
-    VideoCameraIcon,
-    DocumentTextIcon,
-    ClipboardDocumentCheckIcon,
-    AcademicCapIcon,
-    PuzzlePieceIcon,
-    ChevronDownIcon,
-    Bars2Icon, // Icon untuk handle drag-drop
-    EyeIcon
+    ArrowLeftIcon
 } from '@heroicons/vue/24/outline';
 
-// Props dari Controller (Data Kursus & Sesi-nya)
-// const props = defineProps({
-//     course: Object
-// });
-
-const course = ref({
-    id: 1,
-    title: "Fullstack Laravel 10 & Vue 3: Membangun LMS Canggih",
-    slug: "fullstack-laravel-vue",
-    status: "draft", // Coba ganti jadi 'published' untuk lihat bedanya
-    updated_at: "Hari ini, 10:42",
-
-    // Nested Sessions Data (Struktur Hierarki)
-    sessions: [
-        {
-            id: 1,
-            title: "Sesi 1: Pengenalan & Persiapan Lingkungan Kerja",
-            items: [
-                { id: 101, title: "Demo Aplikasi Final yang Akan Kita Buat", type: "video", duration: "05:30" },
-                { id: 102, title: "Install Laragon, Composer, dan Node.js", type: "pdf", duration: "Modul Bacaan" },
-                { id: 103, title: "Bergabung ke Grup Discord Premium", type: "text", duration: "Info Penting" },
-            ]
-        },
-        {
-            id: 2,
-            title: "Sesi 2: Database & Migrations (Inti Backend)",
-            items: [
-                { id: 201, title: "Merancang ERD (Entity Relationship Diagram)", type: "video", duration: "15:20" },
-                { id: 202, title: "Membuat Migration User & Course", type: "video", duration: "20:10" },
-                { id: 203, title: "Kuis: Pemahaman Relasi Eloquent", type: "exam", duration: "10 Soal" },
-            ]
-        },
-        {
-            id: 3,
-            title: "Sesi 3: Implementasi API & Frontend",
-            items: [
-                { id: 301, title: "Setup Inertia.js & Vue 3", type: "video", duration: "12:45" },
-                { id: 302, title: "Tugas: Membuat Halaman Register Custom", type: "assignment", duration: "Upload File" },
-            ]
-        }
-    ]
-});
-const activeTab = ref('curriculum'); // 'curriculum', 'details', 'settings'
-const openSessions = ref([1]); // ID Sesi yang sedang terbuka accordion-nya
-
-// DUMMY DATA (Simulasi struktur data dari backend)
-// Nanti ini diambil dari props.course.sessions
-const sessions = ref([
-    {
-        id: 1,
-        title: "Sesi 1: Pengenalan & Persiapan Tools",
-        items: [
-            { id: 101, title: "Apa itu Laravel & Kenapa Menggunakannya?", type: "video", duration: "10m" },
-            { id: 102, title: "Instalasi PHP, Composer, dan Laragon", type: "pdf", duration: "5m" },
-        ]
-    },
-    {
-        id: 2,
-        title: "Sesi 2: Konsep MVC & Routing",
-        items: [
-            { id: 201, title: "Memahami Model View Controller", type: "video", duration: "15m" },
-            { id: 202, title: "Kuis: Dasar Routing", type: "exam", duration: "Kuis" },
-            { id: 203, title: "Tugas: Buat 5 Route Get & Post", type: "assignment", duration: "Tugas" },
-        ]
-    }
-]);
-
-// Helper Toggle Accordion
-const toggleSession = (id) => {
-    if (openSessions.value.includes(id)) {
-        openSessions.value = openSessions.value.filter(i => i !== id);
-    } else {
-        openSessions.value.push(id);
-    }
+// --- DATA DUMMY (Ceritanya data dari Database) ---
+const dummyCourseData = {
+    id: 99,
+    title_course: 'Mastering Laravel & Vue.js: Fullstack Development',
+    start_date: '2026-02-01', // Format YYYY-MM-DD agar terbaca input date
+    end_date: '2026-05-30'
 };
 
-// Form sederhana untuk update status
-// const form = useForm({
-//     status: props.course?.status || 'draft'
-// });
+// Inisialisasi Form dengan Data Dummy
+const form = useForm({
+    title_course: dummyCourseData.title_course,
+    start_date: dummyCourseData.start_date,
+    end_date: dummyCourseData.end_date,
+});
+
+// Mock Submit Function
+const submit = () => {
+    // Simulasi loading sebentar
+    console.log('Data yang dikirim:', form.data());
+    alert('Simulasi update berhasil! Cek console untuk liat datanya.');
+};
 </script>
 
 <template>
+    <Head title="Edit Kursus" />
 
-    <Head :title="`Edit: ${course.title}`" />
+    <div class="max-w-3xl mx-auto space-y-6">
 
-    <div class="space-y-6 pb-20">
+        <div class="flex items-center gap-2 text-sm text-slate-500 mb-4">
+            <Link :href="route('teacher.dashboard.class.index')" class="flex items-center gap-1 hover:text-indigo-600 transition">
+                <ArrowLeftIcon class="w-4 h-4" />
+                Kembali ke Kelola Kursus
+            </Link>
+            <span>/</span>
+            <span class="text-slate-900 font-medium">Edit Detail</span>
+        </div>
 
-        <div
-            class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div>
-                <div class="flex items-center gap-3 mb-1">
-                    <span v-if="course.status === 'published'"
-                        class="bg-emerald-100 text-emerald-700 text-xs font-bold px-2 py-0.5 rounded">Terbit</span>
-                    <span v-else class="bg-slate-100 text-slate-600 text-xs font-bold px-2 py-0.5 rounded">Draft</span>
-                    <h2 class="text-xl font-bold text-slate-900 line-clamp-1">{{ course.title }}</h2>
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+
+            <div class="bg-slate-50/50 px-6 py-4 border-b border-slate-100 flex items-center gap-3">
+                <div class="p-2 bg-indigo-100 text-indigo-600 rounded-lg">
+                    <PencilSquareIcon class="w-5 h-5" />
                 </div>
-                <p class="text-sm text-slate-500">Terakhir disimpan: Hari ini, 10:42</p>
-            </div>
-            <div class="flex gap-3">
-                <Link :href="`#`"
-                    class="flex items-center gap-2 px-4 py-2 text-sm font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition">
-                <EyeIcon class="w-4 h-4" /> Preview
-                </Link>
-                <button
-                    class="px-6 py-2 text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl shadow-lg shadow-indigo-200 transition">
-                    {{ course.status === 'draft' ? 'Terbitkan Kursus' : 'Simpan Perubahan' }}
-                </button>
-            </div>
-        </div>
-
-        <div class="border-b border-slate-200">
-            <nav class="flex gap-8">
-                <button @click="activeTab = 'curriculum'" class="pb-4 text-sm font-bold border-b-2 transition"
-                    :class="activeTab === 'curriculum' ? 'border-indigo-600 text-indigo-600' : 'border-transparent text-slate-500 hover:text-slate-700'">
-                    Kurikulum & Materi
-                </button>
-                <button @click="activeTab = 'details'" class="pb-4 text-sm font-bold border-b-2 transition"
-                    :class="activeTab === 'details' ? 'border-indigo-600 text-indigo-600' : 'border-transparent text-slate-500 hover:text-slate-700'">
-                    Informasi Dasar
-                </button>
-                <button @click="activeTab = 'settings'" class="pb-4 text-sm font-bold border-b-2 transition"
-                    :class="activeTab === 'settings' ? 'border-indigo-600 text-indigo-600' : 'border-transparent text-slate-500 hover:text-slate-700'">
-                    Harga & Pengaturan
-                </button>
-            </nav>
-        </div>
-
-        <div v-if="activeTab === 'curriculum'" class="max-w-4xl mx-auto space-y-8">
-
-            <div class="flex justify-between items-center">
-                <p class="text-slate-500 text-sm">Susun materi pembelajaran Anda di sini.</p>
-                <button
-                    class="flex items-center gap-2 bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-slate-800 transition">
-                    <PlusIcon class="w-4 h-4" /> Tambah Sesi Baru
-                </button>
+                <div>
+                    <h3 class="font-bold text-slate-900">Informasi Dasar Kursus</h3>
+                    <p class="text-sm text-slate-500">Perbarui nama dan jadwal pelaksanaan kursus.</p>
+                </div>
             </div>
 
-            <div class="space-y-6">
+            <form @submit.prevent="submit" class="p-6 space-y-6">
 
-                <div v-for="(session, sIndex) in sessions" :key="session.id"
-                    class="bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden transition-all duration-300">
-
-                    <div class="bg-slate-100/50 p-4 flex items-center justify-between border-b border-slate-200 group">
-                        <div class="flex items-center gap-3 flex-1 cursor-move">
-                            <Bars2Icon class="w-5 h-5 text-slate-300 hover:text-slate-600" />
-                            <div class="flex items-center gap-2">
-                                <span class="font-bold text-slate-800">Sesi {{ sIndex + 1 }}:</span>
-                                <input type="text" v-model="session.title"
-                                    class="bg-transparent border-none p-0 focus:ring-0 text-slate-800 font-medium w-full" />
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <button class="p-1.5 text-slate-400 hover:text-indigo-600 transition">
-                                <PencilSquareIcon class="w-4 h-4" />
-                            </button>
-                            <button class="p-1.5 text-slate-400 hover:text-red-500 transition">
-                                <TrashIcon class="w-4 h-4" />
-                            </button>
-                            <button @click="toggleSession(session.id)"
-                                class="p-1.5 text-slate-400 hover:text-slate-700 transition">
-                                <ChevronDownIcon class="w-5 h-5 transition-transform"
-                                    :class="openSessions.includes(session.id) ? 'rotate-180' : ''" />
-                            </button>
-                        </div>
-                    </div>
-
-                    <div v-show="openSessions.includes(session.id)" class="p-4 bg-white">
-
-                        <div v-if="session.items.length > 0" class="space-y-3 mb-6">
-                            <div v-for="item in session.items" :key="item.id"
-                                class="flex items-center justify-between p-3 rounded-xl border border-slate-100 hover:border-indigo-100 hover:bg-indigo-50/30 transition group cursor-pointer">
-                                <div class="flex items-center gap-4">
-                                    <div class="p-2 bg-white border border-slate-100 rounded-lg shadow-sm">
-                                        <VideoCameraIcon v-if="item.type === 'video'" class="w-5 h-5 text-indigo-500" />
-                                        <DocumentTextIcon v-else-if="item.type === 'pdf'"
-                                            class="w-5 h-5 text-red-500" />
-                                        <AcademicCapIcon v-else-if="item.type === 'exam'"
-                                            class="w-5 h-5 text-emerald-500" />
-                                        <ClipboardDocumentCheckIcon v-else class="w-5 h-5 text-orange-500" />
-                                    </div>
-                                    <div>
-                                        <p class="text-sm font-semibold text-slate-700 group-hover:text-indigo-700">{{
-                                            item.title }}</p>
-                                        <p class="text-xs text-slate-400 capitalize">{{ item.type }} • {{ item.duration
-                                            }}</p>
-                                    </div>
-                                </div>
-
-                                <div class="flex gap-1 opacity-0 group-hover:opacity-100 transition">
-                                    <button class="p-1.5 text-slate-400 hover:text-indigo-600">
-                                        <PencilSquareIcon class="w-4 h-4" />
-                                    </button>
-                                    <button class="p-1.5 text-slate-400 hover:text-red-600">
-                                        <TrashIcon class="w-4 h-4" />
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div v-else
-                            class="text-center py-6 text-slate-400 text-sm italic border-2 border-dashed border-slate-100 rounded-xl mb-6">
-                            Belum ada materi di sesi ini.
-                        </div>
-
-                        <div class="flex flex-wrap gap-3">
-                            <button
-                                class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 text-slate-600 text-xs font-bold hover:border-indigo-500 hover:text-indigo-600 hover:bg-indigo-50 transition">
-                                <VideoCameraIcon class="w-4 h-4" /> + Video
-                            </button>
-                            <button
-                                class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 text-slate-600 text-xs font-bold hover:border-indigo-500 hover:text-indigo-600 hover:bg-indigo-50 transition">
-                                <DocumentTextIcon class="w-4 h-4" /> + Materi Teks/PDF
-                            </button>
-                            <button
-                                class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 text-slate-600 text-xs font-bold hover:border-indigo-500 hover:text-indigo-600 hover:bg-indigo-50 transition">
-                                <ClipboardDocumentCheckIcon class="w-4 h-4" /> + Tugas
-                            </button>
-                            <button
-                                class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 text-slate-600 text-xs font-bold hover:border-indigo-500 hover:text-indigo-600 hover:bg-indigo-50 transition">
-                                <AcademicCapIcon class="w-4 h-4" /> + Kuis
-                            </button>
-                            <button
-                                class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 text-slate-600 text-xs font-bold hover:border-indigo-500 hover:text-indigo-600 hover:bg-indigo-50 transition">
-                                <PuzzlePieceIcon class="w-4 h-4" /> + Proyek
-                            </button>
-                        </div>
-
-                    </div>
+                <div class="space-y-2">
+                    <label for="title_course" class="block text-sm font-bold text-slate-700">
+                        Nama Kursus <span class="text-red-500">*</span>
+                    </label>
+                    <input
+                        id="title_course"
+                        v-model="form.title_course"
+                        type="text"
+                        placeholder="Contoh: Pemrograman Web Lanjut..."
+                        class="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition shadow-sm"
+                    >
+                    <p v-if="form.errors.title_course" class="text-red-500 text-xs mt-1">
+                        {{ form.errors.title_course }}
+                    </p>
                 </div>
 
-                <button
-                    class="w-full py-4 border-2 border-dashed border-slate-300 rounded-2xl text-slate-400 font-bold hover:border-indigo-500 hover:text-indigo-600 hover:bg-indigo-50 transition flex flex-col items-center justify-center gap-2">
-                    <PlusIcon class="w-6 h-6" />
-                    Tambah Sesi Baru
-                </button>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-            </div>
+                    <div class="space-y-2">
+                        <label for="start_date" class="block text-sm font-bold text-slate-700 flex items-center gap-2">
+                            <CalendarDaysIcon class="w-4 h-4 text-slate-400" />
+                            Tanggal Mulai
+                        </label>
+                        <input
+                            id="start_date"
+                            v-model="form.start_date"
+                            type="date"
+                            class="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition shadow-sm text-slate-600"
+                        >
+                    </div>
+
+                    <div class="space-y-2">
+                        <label for="end_date" class="block text-sm font-bold text-slate-700 flex items-center gap-2">
+                            <CalendarDaysIcon class="w-4 h-4 text-slate-400" />
+                            Tanggal Selesai
+                        </label>
+                        <input
+                            id="end_date"
+                            v-model="form.end_date"
+                            type="date"
+                            class="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition shadow-sm text-slate-600"
+                        >
+                    </div>
+
+                </div>
+
+                <div class="pt-6 border-t border-slate-100 flex items-center justify-end gap-3">
+                    <Link
+                        :href="route('teacher.dashboard.class.index')"
+                        class="px-5 py-2.5 rounded-xl text-sm font-medium text-slate-600 hover:bg-slate-50 border border-transparent hover:border-slate-200 transition"
+                    >
+                        Batal
+                    </Link>
+
+                    <button
+                        type="submit"
+                        :disabled="form.processing"
+                        class="px-6 py-2.5 rounded-xl text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-700 transition shadow-lg shadow-indigo-200 flex items-center gap-2"
+                    >
+                        Simpan Perubahan
+                    </button>
+                </div>
+
+            </form>
         </div>
-
-        <div v-if="activeTab === 'details'">
-            <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm text-center text-slate-500">
-                <p>Form "Informasi Dasar" (Judul, Deskripsi, Thumbnail) diletakkan di sini.</p>
-                <Link href="#" class="text-indigo-600 font-bold hover:underline">Edit Informasi Dasar</Link>
-            </div>
-        </div>
-
-        <div v-if="activeTab === 'settings'">
-            <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm text-center text-slate-500">
-                <p>Form pengaturan harga, level, dan kategori diletakkan di sini.</p>
-            </div>
-        </div>
-
     </div>
 </template>

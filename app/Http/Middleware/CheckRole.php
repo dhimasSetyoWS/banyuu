@@ -17,7 +17,8 @@ class CheckRole
     {
         if (! $request->user() || $request->user()->role !== $role) {
             // Jika tidak cocok, lempar error 403 (Forbidden) atau redirect
-            abort(403, 'Anda tidak memiliki akses ke halaman ini.');
+            return redirect()->route('home');
+            // abort(403, 'Anda tidak memiliki akses ke halaman ini.');
         }
         return $next($request);
     }

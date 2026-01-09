@@ -132,7 +132,7 @@ const filteredCourses = computed(() => {
             <div v-for="course in filteredCourses" :key="course.id"
                 class="group bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col overflow-hidden">
 
-                <div class="relative h-48 bg-slate-100 overflow-hidden">
+                <Link :href="route('dashboard.class.detail')" class="cursor-pointer relative h-48 bg-slate-100 overflow-hidden">
                     <img :src="course.thumbnail" alt="Course Thumbnail"
                         class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
 
@@ -148,14 +148,14 @@ const filteredCourses = computed(() => {
                         class="absolute top-3 left-3 bg-white/90 backdrop-blur text-xs font-bold px-3 py-1 rounded-full text-slate-700 shadow-sm">
                         {{ course.category }}
                     </span>
-                </div>
+                </Link>
 
                 <div class="p-5 flex-1 flex flex-col">
                     <div class="mb-4">
-                        <h3
+                        <Link :href="route('dashboard.class.detail')"
                             class="text-lg font-bold text-slate-900 leading-snug line-clamp-2 mb-1 group-hover:text-indigo-600 transition">
                             {{ course.title }}
-                        </h3>
+                        </Link>
                         <p class="text-sm text-slate-500">{{ course.instructor }}</p>
                     </div>
 

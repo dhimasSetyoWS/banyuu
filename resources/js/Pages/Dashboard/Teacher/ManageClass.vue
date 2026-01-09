@@ -144,17 +144,14 @@ const filteredCourses = computed(() => {
                             {{ formatRupiah(course.price) }}
                         </span>
 
-                        <div class="flex gap-2">
-                            <button
-                                class="p-2 rounded-lg text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 transition border border-transparent hover:border-indigo-100"
-                                title="Edit Informasi">
-                                <PencilSquareIcon class="w-5 h-5" />
-                            </button>
-
-                            <Link :href="`/courses/${course.slug}/manage`"
+                        <div class="flex gap-2 items-center">
+                            <Link :href="route('teacher.dashboard.class.edit')" class="text-slate-900">
+                                <PencilSquareIcon class="w-5 h-5"/>
+                            </Link>
+                            <Link :href="route('teacher.dashboard.class.material')"
                                 class="px-3 py-2 rounded-lg bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition shadow-sm flex items-center gap-2">
                             <SwatchIcon class="w-4 h-4" />
-                            Kelola Materi
+                            Kelola Kursus
                             </Link>
                         </div>
                     </div>

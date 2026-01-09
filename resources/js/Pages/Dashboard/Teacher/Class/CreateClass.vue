@@ -52,7 +52,7 @@ const submit = () => {
     <form @submit.prevent="submit" class="max-w-6xl mx-auto pb-20">
 
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-            <Link href="#" class="flex items-center gap-2 text-sm text-slate-500 hover:text-indigo-600 transition">
+            <Link :href="route('teacher.dashboard.class.index')" class="flex items-center gap-2 text-sm text-slate-500 hover:text-indigo-600 transition">
             <ChevronLeftIcon class="w-4 h-4" />
             Kembali
             </Link>
