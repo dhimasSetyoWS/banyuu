@@ -95,7 +95,7 @@ const filteredCourses = computed(() => {
             <div v-for="course in coursera" :key="course.id"
                 class="group bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-lg hover:border-indigo-100 transition duration-300 flex flex-col">
 
-                <div class="relative h-48 bg-slate-100 overflow-hidden">
+                <Link :href="route('catalog.single')" class="relative h-48 bg-slate-100 overflow-hidden">
                     <img :src="`https://ui-avatars.com/api/?name=${course.title_course}&background=random&size=512`"
                         class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
 
@@ -105,7 +105,7 @@ const filteredCourses = computed(() => {
                             Terbit
                         </span>
                     </div>
-                </div>
+                </Link>
 
                 <div class="p-5 flex-1 flex flex-col">
                     <div class="flex justify-between items-start mb-2">
@@ -119,10 +119,10 @@ const filteredCourses = computed(() => {
                         </div>
                     </div>
 
-                    <h3
+                    <Link :href="route('catalog.single')"
                         class="font-bold text-slate-900 text-lg leading-snug mb-2 line-clamp-2 group-hover:text-indigo-600 transition">
                         {{ course.title_course }}
-                    </h3>
+                    </Link>
 
                     <p class="text-slate-500 text-sm mb-4 line-clamp-2">
                         {{ course.description }}
@@ -145,7 +145,7 @@ const filteredCourses = computed(() => {
                         </span>
 
                         <div class="flex gap-2 items-center">
-                            <Link :href="route('teacher.dashboard.class.edit')" class="text-slate-900">
+                            <Link :href="route('teacher.dashboard.class.edit', course.id)" class="text-slate-900">
                                 <PencilSquareIcon class="w-5 h-5"/>
                             </Link>
                             <Link :href="route('teacher.dashboard.class.material')"

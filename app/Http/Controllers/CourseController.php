@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Kategori;
 use Illuminate\Support\Str;
+
 class CourseController extends Controller
 {
     /**
@@ -80,6 +81,10 @@ class CourseController extends Controller
     public function edit(Course $course)
     {
         //
+        return Inertia::render('Dashboard/Teacher/Class/EditClass', [
+            "course" => $course,
+            "kategoris" => Kategori::all()
+        ]);
     }
 
     /**
@@ -87,7 +92,28 @@ class CourseController extends Controller
      */
     public function update(Request $request, Course $course)
     {
-        //
+
+        // Validasi Input
+        $validated = $request->validate([
+            'title_course' => 'required|string|max:255',
+
+            // PENTING: Rule unique harus meng-ignore ID kursus ini ($id)
+            // Format: unique:nama_tabel,nama_kolom,id_yang_di_ignore
+            'slug' => 'required|string|max:255|unique:courses,slug,' . $course->id,
+
+            'description' => 'required|string',
+            'price' => 'required|numeric|min:0',
+            'kategori_id' => 'required|exists:kategori,id',
+        ]);
+
+        // Lakukan Update
+        // Karena nama field form sama persis dengan kolom database, bisa langsung begini:
+        $course->update($validated);
+
+        // Redirect kembali ke halaman list/index dengan pesan sukses
+        // Pastikan nama route redirect-nya sesuai dengan route list kelas kamu
+        return redirect()->route('teacher.dashboard.class.index')
+            ->with('success', 'Kursus berhasil diperbarui!');
     }
 
     /**
@@ -95,6 +121,9 @@ class CourseController extends Controller
      */
     public function destroy(Course $course)
     {
-        //
+
+        $course->delete();
+        return redirect()->route('teacher.dashboard.class.index')
+            ->with('success', 'Kursus berhasil dihapus secara permanen.');
     }
 }

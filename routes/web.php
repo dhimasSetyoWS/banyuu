@@ -49,9 +49,7 @@ Route::prefix('/teacher/dashboard')->middleware(['auth', 'verified', 'role:teach
         ]);
     })->name('teacher.dashboard.class.index');
     Route::get('/manage-class/create', [CourseController::class, 'create'])->name('teacher.dashboard.class.create');
-    Route::get('/manage-class/edit', function () {
-        return Inertia::render('Dashboard/Teacher/Class/EditClass');
-    })->name('teacher.dashboard.class.edit');
+    Route::get('/manage-class/edit/{course}', [CourseController::class , 'edit'])->name('teacher.dashboard.class.edit');
     Route::get('/manage-class/edit/material', function () {
         return Inertia::render('Dashboard/Teacher/Class/EditMaterial');
     })->name('teacher.dashboard.class.material');

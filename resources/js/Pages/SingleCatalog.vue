@@ -1,4 +1,5 @@
 <script setup>
+import { ChevronLeftIcon } from '@heroicons/vue/24/outline';
 import Navbar from '@/Components/Navbar.vue';
 import Footer from '@/Components/Footer.vue';
 </script>
@@ -7,11 +8,10 @@ import Footer from '@/Components/Footer.vue';
     <header class="pt-32 pb-12 bg-slate-900 text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <nav class="flex text-sm text-slate-400 mb-6 gap-2">
-                <a href="#" class="hover:text-white">Development</a>
-                <span>/</span>
-                <a href="#" class="hover:text-white">Web Programming</a>
-                <span>/</span>
-                <span class="text-white font-medium">Full Stack</span>
+                <Link :href="route('catalog')" class="hover:text-white flex items-center">
+                    <ChevronLeftIcon class="w-4 h-4"/>
+                    Kembali ke catalog
+                </Link>
             </nav>
 
             <div class="grid lg:grid-cols-3 gap-12 items-end">

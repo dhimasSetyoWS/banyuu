@@ -35,14 +35,14 @@ const isMobile = ref(false);
             <div class="flex justify-between items-center h-20">
                 <div class="shrink-0 flex items-center gap-2 cursor-pointer">
                     <Link :href="route('home')">
-                        <img src="img/banuacourse-icon.png" alt="" width="120">
+                        <img src="/img/banuacourse-icon.png" alt="" width="120">
                     </Link>
                 </div>
 
                 <div class="hidden md:flex space-x-8 items-center">
                     <template v-for="link in links">
                         <Link :href="route(link.target)" class="text-sm hover:text-brand-600 transition"
-                            :class="route().current(link.active) ? 'text-brand-600 font-bold' : 'text-slate-600 font-medium'">
+                            :class="route().current(link.active) ? 'text-brand-600 font-extrabold' : 'text-slate-600 font-semibold'">
                             {{ link.text }}</Link>
                     </template>
                 </div>
