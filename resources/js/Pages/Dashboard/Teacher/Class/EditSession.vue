@@ -13,7 +13,7 @@ export default {
 </script>
 
 <script setup>
-import { Head, Link, useForm } from '@inertiajs/vue3';
+import { Head, Link, useForm, router } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import {
     PencilSquareIcon,
@@ -58,7 +58,15 @@ const toggleDropdown = () => {
 const handleAddContent = (type) => {
     isDropdownOpen.value = false;
     // Logika redirect atau modal create content disini
-    alert(`Membuka form tambah: ${type.toUpperCase()}`);
+    if(type == 'materi') {
+        router.get(route('teacher.dashboard.class.create.materi'))
+    } else if(type == 'assignment') {
+        router.get(route('teacher.dashboard.class.create.assignment'))
+    } else if(type == 'exam') {
+        router.get(route('teacher.dashboard.class.create.exam'))
+    } else if(type == 'project') {
+        router.get(route('teacher.dashboard.class.create.project'))
+    }
 };
 
 const updateSession = () => {
@@ -72,7 +80,7 @@ const updateSession = () => {
     <div class="max-w-4xl mx-auto space-y-8">
 
         <div class="flex items-center gap-2 text-sm text-slate-500">
-            <Link :href="route('teacher.dashboard.class.material')" class="flex items-center gap-1 hover:text-indigo-600 transition">
+            <Link :href="route('teacher.dashboard.class.edit.material')" class="flex items-center gap-1 hover:text-indigo-600 transition">
                 <ArrowLeftIcon class="w-4 h-4" />
                 Kembali ke Detail Kursus
             </Link>
@@ -126,7 +134,7 @@ const updateSession = () => {
                 <div class="relative">
                     <button
                         @click="toggleDropdown"
-                        class="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl text-sm font-bold transition shadow-lg shadow-indigo-200"
+                        class="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl text-sm font-bold transition shadow-lg shadow-indigo-200 cursor-pointer"
                     >
                         <PlusIcon class="w-5 h-5" />
                         Tambah Isi
@@ -136,7 +144,7 @@ const updateSession = () => {
                         class="absolute right-0 mt-2 w-56 bg-white rounded-xl border border-slate-200 shadow-xl z-20 overflow-hidden animate-in fade-in zoom-in-95 duration-100"
                     >
                         <div class="py-1">
-                            <button @click="handleAddContent('materi')" class="w-full text-left px-4 py-3 hover:bg-slate-50 flex items-center gap-3 transition">
+                            <button @click="handleAddContent('materi')" class="w-full text-left px-4 py-3 hover:bg-slate-200 flex items-center gap-3 transition cursor-pointer">
                                 <div class="p-1.5 bg-blue-100 text-blue-600 rounded-lg">
                                     <DocumentTextIcon class="w-5 h-5" />
                                 </div>
@@ -146,7 +154,7 @@ const updateSession = () => {
                                 </div>
                             </button>
 
-                            <button @click="handleAddContent('quiz')" class="w-full text-left px-4 py-3 hover:bg-slate-50 flex items-center gap-3 transition">
+                            <button @click="handleAddContent('assignment')" class="w-full text-left px-4 py-3 hover:bg-slate-200 flex items-center gap-3 transition cursor-pointer">
                                 <div class="p-1.5 bg-amber-100 text-amber-600 rounded-lg">
                                     <PuzzlePieceIcon class="w-5 h-5" />
                                 </div>
@@ -156,7 +164,7 @@ const updateSession = () => {
                                 </div>
                             </button>
 
-                            <button @click="handleAddContent('assessment')" class="w-full text-left px-4 py-3 hover:bg-slate-50 flex items-center gap-3 transition">
+                            <button @click="handleAddContent('exam')" class="w-full text-left px-4 py-3 hover:bg-slate-200 flex items-center gap-3 transition cursor-pointer">
                                 <div class="p-1.5 bg-emerald-100 text-emerald-600 rounded-lg">
                                     <ClipboardDocumentCheckIcon class="w-5 h-5" />
                                 </div>
@@ -166,7 +174,7 @@ const updateSession = () => {
                                 </div>
                             </button>
 
-                            <button @click="handleAddContent('project')" class="w-full text-left px-4 py-3 hover:bg-slate-50 flex items-center gap-3 transition">
+                            <button @click="handleAddContent('project')" class="w-full text-left px-4 py-3 hover:bg-slate-200 flex items-center gap-3 transition cursor-pointer">
                                 <div class="p-1.5 bg-purple-100 text-purple-600 rounded-lg">
                                     <CommandLineIcon class="w-5 h-5" />
                                 </div>
@@ -177,7 +185,6 @@ const updateSession = () => {
                             </button>
                         </div>
                     </div>
-
                     <div v-if="isDropdownOpen" @click="isDropdownOpen = false" class="fixed inset-0 z-10"></div>
                 </div>
             </div>

@@ -148,7 +148,7 @@ const filteredCourses = computed(() => {
                             <Link :href="route('teacher.dashboard.class.edit', course.id)" class="text-slate-900">
                                 <PencilSquareIcon class="w-5 h-5"/>
                             </Link>
-                            <Link :href="route('teacher.dashboard.class.material')"
+                            <Link :href="route('teacher.dashboard.class.edit.material')"
                                 class="px-3 py-2 rounded-lg bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition shadow-sm flex items-center gap-2">
                             <SwatchIcon class="w-4 h-4" />
                             Kelola Kursus

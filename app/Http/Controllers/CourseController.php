@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Kategori;
@@ -125,5 +126,11 @@ class CourseController extends Controller
         $course->delete();
         return redirect()->route('teacher.dashboard.class.index')
             ->with('success', 'Kursus berhasil dihapus secara permanen.');
+    }
+
+    // Edit Material
+    public function edit_material() {
+        Log::debug("TESTING");
+        return Inertia::render('Dashboard/Teacher/Class/EditMaterial');
     }
 }
