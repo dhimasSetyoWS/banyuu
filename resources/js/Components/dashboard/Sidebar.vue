@@ -26,9 +26,9 @@ const allLinks = [
     { icon: Squares2X2Icon, text: "Dashboard Guru", target: "teacher.dashboard", active: "teacher.dashboard", roles: ['teacher'] },
     { icon: BookOpenIcon, text: "Manajemen Kelas", target: "teacher.dashboard.class.index", active: "teacher.dashboard.class.*", roles: ['teacher'] },
     { icon: BookOpenIcon, text: "Kelas Saya", target: "dashboard.class.index", active: "dashboard.class.*", roles: ['student'] },
-    { icon: DocumentDuplicateIcon, text: "Pertanyaan", target: "dashboard.pertanyaan", active: "dashboard.pertanyaan", roles: ['teacher' , 'student'] },
-    { icon: NewspaperIcon, text: "Materi", target: "dashboard.material", active: "dashboard.material", roles: ['student' , 'teacher']  },
-    { icon: DocumentDuplicateIcon, text: "Assessment", target: "dashboard", active: "home", roles: ['student'] },
+    { icon: DocumentDuplicateIcon, text: "Pertanyaan", target: "dashboard.pertanyaan.index", active: "dashboard.pertanyaan.*", roles: ['teacher' , 'student'] },
+    { icon: NewspaperIcon, text: "Materi", target: "dashboard.material.index", active: "dashboard.material.*", roles: ['student' , 'teacher']  },
+    { icon: DocumentDuplicateIcon, text: "Assessment", target: "dashboard.assessment.index", active: "dashboard.assessment.*", roles: ['student', 'teacher'] },
     // --- Simulasi Menu Tambahan (Bisa dihapus nanti) ---
     { icon: BookOpenIcon, text: "Riwayat Belajar", target: "dashboard", active: "home", roles: ['student'] },
     { icon: NewspaperIcon, text: "Sertifikat", target: "dashboard", active: "home", roles: ['student'] },
@@ -79,7 +79,7 @@ const links = allLinks.filter(link => link.roles.includes(user.role));
                 <div v-if="isDropdownOpen" class="absolute bottom-full left-0 w-full mb-2 px-4 z-50">
                     <div class="bg-white rounded-xl shadow-lg border border-slate-100 overflow-hidden py-1">
                         <Link :href="route('dashboard')"
-                            class="flex items-center gap-2 px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-indigo-600 transition">
+                            class="cursor-pointer flex items-center gap-2 px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-indigo-600 transition">
                         <UserCircleIcon class="w-4 h-4" />
                         Profile Setting
                         </Link>
@@ -87,7 +87,7 @@ const links = allLinks.filter(link => link.roles.includes(user.role));
                         <div class="border-t border-slate-50 my-1"></div>
 
                         <Link :href="route('logout')" method="post" as="button"
-                            class="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition text-left">
+                            class="cursor-pointer w-full flex items-center gap-2 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition text-left">
                         <ArrowRightOnRectangleIcon class="w-4 h-4" />
                         Keluar
                         </Link>
@@ -96,7 +96,7 @@ const links = allLinks.filter(link => link.roles.includes(user.role));
             </transition>
 
             <button @click="isDropdownOpen = !isDropdownOpen"
-                class="flex items-center gap-3 w-full p-2 rounded-xl hover:bg-slate-50 transition text-left group">
+                class="cursor-pointer flex items-center gap-3 w-full p-2 rounded-xl hover:bg-slate-50 transition text-left group">
                 <img :src="user.profile_photo_url || `https://ui-avatars.com/api/?name=${user.name}&background=eff6ff&color=4f46e5`"
                     class="w-10 h-10 rounded-full object-cover border border-slate-200" alt="User">
 

@@ -2,7 +2,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 
 export default {
-    layout: (h, page) => h(AuthenticatedLayout, { header: 'Tambah Exam Baru' }, () => [page])
+    layout: (h, page) => h(AuthenticatedLayout, { header: 'Edit Materi' }, () => [page])
 }
 </script>
 
@@ -20,7 +20,7 @@ import {
 } from '@heroicons/vue/24/outline';
 
 const form = useForm({
-    title: '',
+    title: 'Judul materi yang sudah ada',
     content: '',
     course_id: '',
     subject: '',
@@ -49,7 +49,7 @@ const removeFile = () => {
 
 <template>
 
-    <Head title="Tambah Exam" />
+    <Head title="Tambah Materi" />
 
     <form @submit.prevent="submit" class="max-w-5xl mx-auto pb-20">
 
@@ -65,13 +65,13 @@ const removeFile = () => {
 
             <h3 class="font-bold text-slate-900 text-lg mb-6 flex items-center gap-2">
                 <DocumentTextIcon class="w-5 h-5 text-slate-400" />
-                Konten Exam
+                Konten Materi
             </h3>
 
             <div class="space-y-6">
 
                 <div>
-                    <label class="block text-sm font-bold text-slate-700 mb-2">Judul Exam</label>
+                    <label class="block text-sm font-bold text-slate-700 mb-2">Judul Materi</label>
                     <input v-model="form.title" type="text"
                         class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-100 focus:border-indigo-500 transition outline-none text-slate-900 placeholder:text-slate-400 font-medium"
                         placeholder="Contoh: Pengenalan HTML5 & Struktur Dasar">
@@ -129,10 +129,10 @@ const removeFile = () => {
 
                 </div>
                 <div>
-                    <label class="block text-sm font-bold text-slate-700 mb-2">Isi Exam</label>
+                    <label class="block text-sm font-bold text-slate-700 mb-2">Isi Materi</label>
                     <div class="prose-editor-wrapper">
                         <QuillEditor v-model:content="form.content" contentType="html" theme="snow" toolbar="full"
-                            placeholder="Tulis exam di sini..." />
+                            placeholder="Tulis materi di sini..." />
                     </div>
                     <p v-if="form.errors.content" class="text-xs text-red-500 mt-1">{{ form.errors.content }}</p>
                 </div>
@@ -143,7 +143,7 @@ const removeFile = () => {
             <button type="submit" :disabled="form.processing"
                 class="px-6 py-2.5 rounded-xl bg-indigo-600 text-white text-sm font-bold hover:bg-indigo-700 shadow-lg shadow-indigo-200 transition disabled:opacity-70 cursor-pointer">
                 <span v-if="form.processing">Menyimpan...</span>
-                <span v-else>Simpan Exam</span>
+                <span v-else>Simpan Materi</span>
             </button>
         </div>
 

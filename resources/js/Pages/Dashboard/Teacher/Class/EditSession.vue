@@ -59,7 +59,7 @@ const handleAddContent = (type) => {
     isDropdownOpen.value = false;
     // Logika redirect atau modal create content disini
     if(type == 'materi') {
-        router.get(route('teacher.dashboard.class.create.materi'))
+        router.get(route('teacher.dashboard.class.create.material'))
     } else if(type == 'assignment') {
         router.get(route('teacher.dashboard.class.create.assignment'))
     } else if(type == 'exam') {
@@ -160,7 +160,7 @@ const updateSession = () => {
                                 </div>
                                 <div>
                                     <span class="block text-sm font-bold text-slate-700">Assignment</span>
-                                    <span class="block text-xs text-slate-500">Tugas - tugas siswa</span>
+                                    <span class="block text-xs text-slate-500">Tugas - Tugas Murid</span>
                                 </div>
                             </button>
 
@@ -212,9 +212,9 @@ const updateSession = () => {
                         </div>
 
                         <div class="flex items-center gap-2">
-                            <button class="p-2 hover:bg-slate-200 rounded-lg text-slate-500 transition">
+                            <Link :href="route('teacher.dashboard.class.edit.material')" class="p-2 hover:bg-slate-200 rounded-lg text-slate-500 transition">
                                 <PencilSquareIcon class="w-4 h-4" />
-                            </button>
+                            </Link>
                             <button class="p-2 hover:bg-red-50 hover:text-red-600 rounded-lg text-slate-400 transition">
                                 <TrashIcon class="w-4 h-4" />
                             </button>

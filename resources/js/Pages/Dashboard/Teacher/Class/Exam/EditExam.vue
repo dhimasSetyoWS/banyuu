@@ -2,7 +2,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 
 export default {
-    layout: (h, page) => h(AuthenticatedLayout, { header: 'Tambah Exam Baru' }, () => [page])
+    layout: (h, page) => h(AuthenticatedLayout, { header: 'Edit Exam' }, () => [page])
 }
 </script>
 
@@ -20,7 +20,7 @@ import {
 } from '@heroicons/vue/24/outline';
 
 const form = useForm({
-    title: '',
+    title: 'Judul exam yang sudah ada',
     content: '',
     course_id: '',
     subject: '',

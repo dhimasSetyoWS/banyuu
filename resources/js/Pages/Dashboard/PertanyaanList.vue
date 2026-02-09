@@ -147,7 +147,7 @@ const getDifficultyColor = (diff) => {
 
                 </div>
 
-                <Link v-show="$page.props.auth.user.role == 'teacher'" :href="'#'" class="w-full md:w-auto px-5 py-2.5 bg-indigo-600 text-white text-sm font-bold rounded-xl hover:bg-indigo-700 shadow-lg shadow-indigo-200 transition flex items-center justify-center gap-2">
+                <Link v-show="$page.props.auth.user.role == 'teacher'" :href="route('dashboard.pertanyaan.create')" class="w-full md:w-auto px-5 py-2.5 bg-indigo-600 text-white text-sm font-bold rounded-xl hover:bg-indigo-700 shadow-lg shadow-indigo-200 transition flex items-center justify-center gap-2">
                     <span>+ Buat Pertanyaan</span>
                 </Link>
             </div>

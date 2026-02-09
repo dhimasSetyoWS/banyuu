@@ -95,7 +95,7 @@ const filteredMaterials = computed(() => {
 
 // 4. HELPER UI (Icon & Color based on File Type)
 const getFileIcon = (type) => {
-    switch(type) {
+    switch (type) {
         case 'PDF': return DocumentTextIcon;
         case 'Video': return VideoCameraIcon;
         case 'PPT': return PresentationChartLineIcon;
@@ -105,7 +105,7 @@ const getFileIcon = (type) => {
 };
 
 const getFileColorClass = (type) => {
-    switch(type) {
+    switch (type) {
         case 'PDF': return 'bg-red-50 text-red-600 border-red-100';
         case 'Video': return 'bg-indigo-50 text-indigo-600 border-indigo-100';
         case 'PPT': return 'bg-orange-50 text-orange-600 border-orange-100';
@@ -116,11 +116,12 @@ const getFileColorClass = (type) => {
 </script>
 
 <template>
-    <Head title="Bank Materi" />
 
+    <Head title="Bank Materi" />
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-8">
-            <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row gap-4 items-center justify-between">
+            <div
+                class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row gap-4 items-center justify-between">
 
                 <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto flex-1">
                     <div class="relative w-full md:w-80">
@@ -147,10 +148,10 @@ const getFileColorClass = (type) => {
                     </div>
                 </div>
 
-                <Link v-if="$page.props.auth.user.role == 'teacher'" :href="'#'" class="w-full md:w-auto px-5 py-2.5 bg-indigo-600 text-white text-sm font-bold rounded-xl hover:bg-indigo-700 shadow-lg shadow-indigo-200 transition flex items-center justify-center gap-2">
+                <Link v-if="$page.props.auth.user.role == 'teacher'" :href="route('dashboard.material.create')"
+                    class="w-full md:w-auto px-5 py-2.5 bg-indigo-600 text-white text-sm font-bold rounded-xl hover:bg-indigo-700 shadow-lg shadow-indigo-200 transition flex items-center justify-center gap-2">
                     <ArrowDownTrayIcon class="w-4 h-4 transform rotate-180" />
                     <span>Upload Materi</span>
-                    <!-- Bisaaa ada checkbox untuk public atau tidak -->
                 </Link>
             </div>
 
@@ -160,17 +161,20 @@ const getFileColorClass = (type) => {
                     class="group bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg hover:border-indigo-200 hover:-translate-y-1 transition-all duration-300 relative">
 
                     <div class="flex justify-between items-start mb-4">
-                        <div :class="`w-12 h-12 rounded-xl flex items-center justify-center border ${getFileColorClass(item.type)}`">
+                        <div
+                            :class="`w-12 h-12 rounded-xl flex items-center justify-center border ${getFileColorClass(item.type)}`">
                             <component :is="getFileIcon(item.type)" class="w-6 h-6" />
                         </div>
 
-                        <span class="text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-500 px-2 py-1 rounded-md">
+                        <span
+                            class="text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-500 px-2 py-1 rounded-md">
                             {{ item.type }}
                         </span>
                     </div>
 
                     <div class="mb-6">
-                        <Link :href="'#'" class="font-bold text-slate-900 group-hover:text-indigo-600 transition line-clamp-2 mb-1">
+                        <Link :href="'#'"
+                            class="font-bold text-slate-900 group-hover:text-indigo-600 transition line-clamp-2 mb-1">
                             {{ item.title }}
                         </Link>
                         <p class="text-xs text-slate-500">{{ item.category }} • {{ item.uploaded_at }}</p>
@@ -178,20 +182,28 @@ const getFileColorClass = (type) => {
 
                     <div class="flex items-center justify-between border-t border-slate-50 pt-4 mt-auto">
                         <div class="flex gap-2">
-                            <button class="p-2 rounded-lg text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 transition" title="Edit">
-                                <PencilSquareIcon v-if="$page.props.auth.user.role == 'teacher'" class="w-4 h-4" />
-                                <EyeIcon v-else class="w-4 h-4" />
-                            </button>
-                            <button v-if="$page.props.auth.user.role == 'teacher'" class="p-2 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition" title="Hapus">
+                            <Link
+                                class="p-2 rounded-lg text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 transition"
+                                title="Edit" v-if="$page.props.auth.user.role == 'teacher'"
+                                :href="route('dashboard.material.edit')">
+                                <PencilSquareIcon class="w-4 h-4" />
+                            </Link>
+                            <Link v-else>
+                                <EyeIcon class="w-4 h-4" />
+                            </Link>
+                            <Link href="#" v-if="$page.props.auth.user.role == 'teacher'"
+                                class="p-2 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition"
+                                title="Hapus">
                                 <TrashIcon class="w-4 h-4" />
-                            </button>
+                            </Link>
                         </div>
                     </div>
 
                 </div>
             </div>
 
-            <div v-if="filteredMaterials.length === 0" class="flex flex-col items-center justify-center py-16 bg-white rounded-2xl border border-dashed border-slate-300">
+            <div v-if="filteredMaterials.length === 0"
+                class="flex flex-col items-center justify-center py-16 bg-white rounded-2xl border border-dashed border-slate-300">
                 <div class="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mb-4">
                     <DocumentTextIcon class="w-8 h-8 text-slate-300" />
                 </div>

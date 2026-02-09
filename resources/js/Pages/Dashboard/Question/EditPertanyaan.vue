@@ -2,7 +2,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 
 export default {
-    layout: (h, page) => h(AuthenticatedLayout, { header: 'Tambah Exam Baru' }, () => [page])
+    layout: (h, page) => h(AuthenticatedLayout, { header: 'Edit Pertanyaan' }, () => [page])
 }
 </script>
 
@@ -20,10 +20,11 @@ import {
 } from '@heroicons/vue/24/outline';
 
 const form = useForm({
-    title: '',
+    title: 'Judul pertanyaan yang sudah ada',
     content: '',
     course_id: '',
     subject: '',
+    is_public: true, // Saya ganti checkbox visibility jadi boolean biar lebih clean
     file: null,      // Tambahkan field file
 });
 
@@ -49,15 +50,15 @@ const removeFile = () => {
 
 <template>
 
-    <Head title="Tambah Exam" />
+    <Head title="Tambah Pertanyaan" />
 
     <form @submit.prevent="submit" class="max-w-5xl mx-auto pb-20">
 
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-            <Link :href="route('teacher.dashboard.class.edit.session')"
+            <Link :href="route('dashboard.pertanyaan.index')"
                 class="flex items-center gap-2 text-sm text-slate-500 hover:text-indigo-600 transition">
                 <ChevronLeftIcon class="w-4 h-4" />
-                Kembali ke Edit Session
+                Kembali ke Pertanyaan/Question
             </Link>
         </div>
 
@@ -65,13 +66,13 @@ const removeFile = () => {
 
             <h3 class="font-bold text-slate-900 text-lg mb-6 flex items-center gap-2">
                 <DocumentTextIcon class="w-5 h-5 text-slate-400" />
-                Konten Exam
+                Konten Pertanyaan
             </h3>
 
             <div class="space-y-6">
 
                 <div>
-                    <label class="block text-sm font-bold text-slate-700 mb-2">Judul Exam</label>
+                    <label class="block text-sm font-bold text-slate-700 mb-2">Judul Pertanyaan</label>
                     <input v-model="form.title" type="text"
                         class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-100 focus:border-indigo-500 transition outline-none text-slate-900 placeholder:text-slate-400 font-medium"
                         placeholder="Contoh: Pengenalan HTML5 & Struktur Dasar">
@@ -94,6 +95,17 @@ const removeFile = () => {
                                 <option value="Ekonomi">Ekonomi</option>
                                 <option value="Teknologi">Teknologi</option>
                             </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2">Visibility</label>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 flex items-center gap-3">
+                            <input type="checkbox" v-model="form.is_public"
+                                class="w-4 h-4 rounded border-slate-300 text-brand-600 focus:ring-brand-600 cursor-pointer accent-indigo-600">
+                            <span class="text-slate-600 text-sm font-medium">
+                                {{ form.is_public ? 'Publik (Semua Siswa)' : 'Privat (Hanya Saya)' }}
+                            </span>
                         </div>
                     </div>
 
@@ -129,10 +141,10 @@ const removeFile = () => {
 
                 </div>
                 <div>
-                    <label class="block text-sm font-bold text-slate-700 mb-2">Isi Exam</label>
+                    <label class="block text-sm font-bold text-slate-700 mb-2">Isi Pertanyaan</label>
                     <div class="prose-editor-wrapper">
                         <QuillEditor v-model:content="form.content" contentType="html" theme="snow" toolbar="full"
-                            placeholder="Tulis exam di sini..." />
+                            placeholder="Tulis pertanyaan di sini..." />
                     </div>
                     <p v-if="form.errors.content" class="text-xs text-red-500 mt-1">{{ form.errors.content }}</p>
                 </div>
@@ -143,7 +155,7 @@ const removeFile = () => {
             <button type="submit" :disabled="form.processing"
                 class="px-6 py-2.5 rounded-xl bg-indigo-600 text-white text-sm font-bold hover:bg-indigo-700 shadow-lg shadow-indigo-200 transition disabled:opacity-70 cursor-pointer">
                 <span v-if="form.processing">Menyimpan...</span>
-                <span v-else>Simpan Exam</span>
+                <span v-else>Simpan Pertanyaan</span>
             </button>
         </div>
 
