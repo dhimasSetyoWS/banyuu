@@ -23,8 +23,9 @@ import {
     PuzzlePieceIcon,        // Icon Quiz
     ClipboardDocumentCheckIcon, // Icon Assessment
     CommandLineIcon,        // Icon Project
-    EllipsisVerticalIcon,
-    TrashIcon
+    Cog6ToothIcon,
+    TrashIcon,
+    ClipboardDocumentIcon
 } from '@heroicons/vue/24/outline';
 
 // --- DATA DUMMY ---
@@ -40,6 +41,7 @@ const sessionData = {
 const existingContents = ref([
     { id: 1, title: 'Video: Konsep MVC', type: 'materi', duration: '10 min' },
     { id: 2, title: 'PDF: Struktur Folder Laravel', type: 'materi', duration: '5 min' },
+    { id: 3, title: 'Tugas : UTS Algoritma', type: 'assignment', duration: 'No Deadline' },
 ]);
 
 // --- STATE ---
@@ -69,6 +71,19 @@ const handleAddContent = (type) => {
     }
 };
 
+const handleEditContent = (type) => {
+    // Logika redirect atau modal create content disini
+    if(type == 'materi') {
+        return route('teacher.dashboard.class.edit.material')
+    } else if(type == 'assignment') {
+        return route('teacher.dashboard.class.edit.assignment')
+    } else if(type == 'exam') {
+        return route('teacher.dashboard.class.edit.exam')
+    } else if(type == 'project') {
+        return route('teacher.dashboard.class.edit.project')
+    }
+};
+
 const updateSession = () => {
     alert('Detail sesi diperbarui!');
 };
@@ -80,7 +95,7 @@ const updateSession = () => {
     <div class="max-w-4xl mx-auto space-y-8">
 
         <div class="flex items-center gap-2 text-sm text-slate-500">
-            <Link :href="route('teacher.dashboard.class.edit.material')" class="flex items-center gap-1 hover:text-indigo-600 transition">
+            <Link :href="route('teacher.dashboard.class.material')" class="flex items-center gap-1 hover:text-indigo-600 transition">
                 <ArrowLeftIcon class="w-4 h-4" />
                 Kembali ke Detail Kursus
             </Link>
@@ -202,7 +217,8 @@ const updateSession = () => {
                             </div>
 
                             <div class="p-2 bg-indigo-50 text-indigo-600 rounded-lg">
-                                <DocumentTextIcon class="w-5 h-5" />
+                                <DocumentTextIcon v-if="item.type == 'materi'" class="w-5 h-5" />
+                                <ClipboardDocumentIcon v-if="item.type == 'assignment'" class="w-5 h-5" />
                             </div>
 
                             <div>
@@ -212,8 +228,8 @@ const updateSession = () => {
                         </div>
 
                         <div class="flex items-center gap-2">
-                            <Link :href="route('teacher.dashboard.class.edit.material')" class="p-2 hover:bg-slate-200 rounded-lg text-slate-500 transition">
-                                <PencilSquareIcon class="w-4 h-4" />
+                            <Link :href="handleEditContent(item.type)" class="p-2 hover:bg-slate-200 rounded-lg text-slate-500 transition">
+                                <Cog6ToothIcon class="w-4 h-4" />
                             </Link>
                             <button class="p-2 hover:bg-red-50 hover:text-red-600 rounded-lg text-slate-400 transition">
                                 <TrashIcon class="w-4 h-4" />

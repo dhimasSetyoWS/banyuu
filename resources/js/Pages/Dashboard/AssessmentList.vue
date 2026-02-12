@@ -7,7 +7,7 @@ export default {
 </script>
 
 <script setup>
-import { Head, Link } from '@inertiajs/vue3';
+import { Head, Link, usePage } from '@inertiajs/vue3';
 import { ref, computed } from 'vue';
 import {
     MagnifyingGlassIcon,
@@ -20,7 +20,7 @@ import {
     UsersIcon,
     PencilSquareIcon,
     TrashIcon,
-    ChartBarIcon
+    EyeIcon
 } from '@heroicons/vue/24/outline';
 
 // 1. DATA DUMMY
@@ -109,6 +109,8 @@ const getStatusLabel = (status) => {
     }
 };
 
+const user = usePage().props.auth.user;
+
 const getTypeIcon = (type) => type === 'quiz' ? ClipboardDocumentCheckIcon : DocumentArrowUpIcon;
 const getTypeColor = (type) => type === 'quiz' ? 'text-indigo-600 bg-indigo-50 border-indigo-100' : 'text-orange-600 bg-orange-50 border-orange-100';
 const getTypeLabel = (type) => type === 'quiz' ? 'Kuis Online' : 'Tugas Upload';
@@ -126,7 +128,7 @@ const getTypeLabel = (type) => type === 'quiz' ? 'Kuis Online' : 'Tugas Upload';
                 <p class="text-slate-500 text-sm">Kelola ujian, kuis, dan tugas harian siswa.</p>
             </div>
 
-            <Link :href="route('dashboard.assessment.create')"
+            <Link v-if="user.role == 'teacher'" :href="route('dashboard.assessment.create')"
                 class="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-indigo-600 text-white text-sm font-bold rounded-xl hover:bg-indigo-700 shadow-lg shadow-indigo-200 transition">
                 <PlusIcon class="w-5 h-5" />
                 Buat Baru
@@ -208,17 +210,17 @@ const getTypeLabel = (type) => type === 'quiz' ? 'Kuis Online' : 'Tugas Upload';
                         </div>
 
                         <div class="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <Link :href="route('dashboard.assessment.edit')"
+                            <Link v-if="user.role == 'teacher'" :href="route('dashboard.assessment.edit')"
                                 class="p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition" title="Edit">
                                 <PencilSquareIcon class="w-5 h-5" />
                             </Link>
                             <Link href="#"
-                                class="p-2 text-slate-400 hover:text-green-600 hover:bg-green-50 rounded-lg transition" title="Lihat Hasil">
-                                <ChartBarIcon class="w-5 h-5" />
+                                class="p-2 text-slate-400 hover:text-green-600 hover:bg-green-50 rounded-lg transition" title="Lihat Assesment">
+                                <EyeIcon class="w-5 h-5" />
                             </Link>
-                            <button class="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition" title="Hapus">
+                            <Link v-if="user.role == 'teacher'" href="'#'" class="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition" title="Hapus">
                                 <TrashIcon class="w-5 h-5" />
-                            </button>
+                            </Link>
                         </div>
 
                     </div>

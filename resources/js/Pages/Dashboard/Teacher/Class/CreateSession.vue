@@ -47,7 +47,7 @@ const submit = () => {
     <div class="max-w-3xl mx-auto space-y-6">
 
         <div class="flex items-center gap-2 text-sm text-slate-500 mb-4">
-            <Link :href="route('teacher.dashboard.class.edit.material')" class="flex items-center gap-1 hover:text-indigo-600 transition">
+            <Link :href="route('teacher.dashboard.class.edit.session')" class="flex items-center gap-1 hover:text-indigo-600 transition">
                 <ArrowLeftIcon class="w-4 h-4" />
                 Kembali ke Detail Kursus
             </Link>

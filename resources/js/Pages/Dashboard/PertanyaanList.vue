@@ -15,7 +15,9 @@ import {
     FunnelIcon,
     ChatBubbleLeftRightIcon,
     CheckCircleIcon,
-    DocumentTextIcon
+    DocumentTextIcon,
+    EyeIcon,
+    PencilSquareIcon
 } from '@heroicons/vue/24/outline';
 
 // 1. DATA DUMMY (Bank Soal)
@@ -155,7 +157,7 @@ const getDifficultyColor = (diff) => {
             <div class="space-y-4">
 
                 <div v-for="question in filteredQuestions" :key="question.id"
-                    class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:border-indigo-300 hover:shadow-md transition group cursor-pointer">
+                    class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:border-indigo-300 hover:shadow-md transition group">
 
                     <div class="flex flex-col md:flex-row md:items-start justify-between gap-4">
 
@@ -192,19 +194,15 @@ const getDifficultyColor = (diff) => {
                         </div>
 
                         <div class="flex items-center gap-4 md:border-l md:border-slate-100 md:pl-6">
-                             <div class="text-center min-w-[60px]">
+                            <div class="text-center min-w-[60px]">
                                 <div class="flex items-center justify-center gap-1 text-slate-400 mb-1">
-                                    <ChatBubbleLeftRightIcon class="w-5 h-5" />
+                                    <Link :href="'#'">
+                                        <EyeIcon class="w-7 h-7 p-1 rounded-lg text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 transitionr:text-indigo-600 cursor-pointer" />
+                                    </Link>
+                                    <Link :href="route('dashboard.pertanyaan.edit')">
+                                        <PencilSquareIcon class="w-7 h-7 p-1 rounded-lg text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 transitionr:text-indigo-600 cursor-pointer" />
+                                    </Link>
                                 </div>
-                                <span class="block text-lg font-bold text-slate-900">{{ question.answers }}</span>
-                                <span class="text-xs text-slate-400">Jawaban</span>
-                            </div>
-
-                            <div v-if="question.status === 'Solved'" class="text-center min-w-[60px]">
-                                <div class="w-10 h-10 mx-auto rounded-full bg-green-50 flex items-center justify-center text-green-600">
-                                    <CheckCircleIcon class="w-6 h-6" />
-                                </div>
-                                <span class="text-[10px] font-bold text-green-600 mt-1 block">Solved</span>
                             </div>
                         </div>
 

@@ -61,6 +61,11 @@ Route::prefix('/teacher/dashboard')->middleware(['auth', 'verified', 'role:teach
         return Inertia::render('Dashboard/Teacher/Class/EditSession');
     })->name('teacher.dashboard.class.edit.session');
 
+    // All Materi
+    Route::get('/manage-class/nama_class', function () {
+        return Inertia::render('Dashboard/Teacher/Class/EditMaterial');
+    })->name('teacher.dashboard.class.material');
+
     // Create Materi Class
     Route::get('/manage-class/edit/session/create/materi', function () {
         return Inertia::render('Dashboard/Teacher/Class/Materi/CreateMateri');
