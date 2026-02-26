@@ -26,17 +26,10 @@ const allLinks = [
     { icon: Squares2X2Icon, text: "Dashboard Guru", target: "teacher.dashboard", active: "teacher.dashboard", roles: ['teacher'] },
     { icon: BookOpenIcon, text: "Manajemen Kelas", target: "teacher.dashboard.class.index", active: "teacher.dashboard.class.*", roles: ['teacher'] },
     { icon: BookOpenIcon, text: "Kelas Saya", target: "dashboard.class.index", active: "dashboard.class.*", roles: ['student'] },
-    { icon: DocumentDuplicateIcon, text: "Pertanyaan", target: "dashboard.pertanyaan.index", active: "dashboard.pertanyaan.*", roles: ['teacher' , 'student'] },
-    { icon: NewspaperIcon, text: "Materi", target: "dashboard.material.index", active: "dashboard.material.*", roles: ['student' , 'teacher']  },
-    { icon: DocumentDuplicateIcon, text: "Assessment", target: "dashboard.assessment.index", active: "dashboard.assessment.*", roles: ['student', 'teacher'] },
-    // --- Simulasi Menu Tambahan (Bisa dihapus nanti) ---
-    { icon: BookOpenIcon, text: "Riwayat Belajar", target: "dashboard", active: "home", roles: ['student'] },
-    { icon: NewspaperIcon, text: "Sertifikat", target: "dashboard", active: "home", roles: ['student'] },
-    { icon: ChatBubbleLeftEllipsisIcon, text: "Diskusi Group", target: "dashboard", active: "home", roles: ['student'] },
-    { icon: Squares2X2Icon, text: "Webinar", target: "dashboard", active: "home", roles: ['student'] },
-    { icon: DocumentDuplicateIcon, text: "Ujian Akhir", target: "dashboard", active: "home", roles: ['student'] },
-    { icon: UserCircleIcon, text: "Instruktur", target: "dashboard", active: "home", roles: ['student'] },
-    { icon: BookOpenIcon, text: "Modul Tambahan", target: "dashboard", active: "home", roles: ['student'] },
+    { icon: DocumentDuplicateIcon, text: "Pertanyaan", target: "dashboard.pertanyaan.index", active: "dashboard.pertanyaan.*", roles: ['teacher'] },
+    { icon: NewspaperIcon, text: "Materi", target: "dashboard.material.index", active: "dashboard.material.*", roles: ['teacher']  },
+    { icon: DocumentDuplicateIcon, text: "Assessment", target: "dashboard.assessment.index", active: "dashboard.assessment.*", roles: ['teacher'] },
+    { icon: UserCircleIcon, text: "Profile", target: "dashboard.profile", active: "dashboard.profile", roles: ['teacher', 'student'] },
 ];
 
 const links = allLinks.filter(link => link.roles.includes(user.role));
@@ -78,7 +71,7 @@ const links = allLinks.filter(link => link.roles.includes(user.role));
                 leave-to-class="transform opacity-0 scale-95 translate-y-2">
                 <div v-if="isDropdownOpen" class="absolute bottom-full left-0 w-full mb-2 px-4 z-50">
                     <div class="bg-white rounded-xl shadow-lg border border-slate-100 overflow-hidden py-1">
-                        <Link :href="route('dashboard')"
+                        <Link :href="route('dashboard.profile')"
                             class="cursor-pointer flex items-center gap-2 px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-indigo-600 transition">
                         <UserCircleIcon class="w-4 h-4" />
                         Profile Setting

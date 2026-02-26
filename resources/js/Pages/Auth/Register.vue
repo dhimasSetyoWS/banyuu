@@ -23,7 +23,7 @@ const submit = () => {
                 title: 'Registrasi Gagal!',
                 text: firstMessage || 'Mohon periksa kembali data isian anda.',
                 confirmButtonText: 'Perbaiki',
-                confirmButtonColor: '#2563EB',
+                confirmButtonColor: '#4F39F6',
                 heightAuto: false
             });
         }

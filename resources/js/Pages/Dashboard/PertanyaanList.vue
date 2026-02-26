@@ -177,7 +177,7 @@ const getDifficultyColor = (diff) => {
                                 </span>
                             </div>
 
-                            <h3 class="text-lg font-bold text-slate-900 group-hover:text-indigo-600 transition leading-snug">
+                            <h3 class="cursor-pointer text-lg font-bold text-slate-900 group-hover:text-indigo-600 transition leading-snug">
                                 {{ question.title }}
                             </h3>
 
@@ -199,13 +199,12 @@ const getDifficultyColor = (diff) => {
                                     <Link :href="'#'">
                                         <EyeIcon class="w-7 h-7 p-1 rounded-lg text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 transitionr:text-indigo-600 cursor-pointer" />
                                     </Link>
-                                    <Link :href="route('dashboard.pertanyaan.edit')">
+                                    <Link v-if="$page.props.auth.user.role == 'teacher'" :href="route('dashboard.pertanyaan.edit')">
                                         <PencilSquareIcon class="w-7 h-7 p-1 rounded-lg text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 transitionr:text-indigo-600 cursor-pointer" />
                                     </Link>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
 

@@ -182,7 +182,7 @@ const filteredCourses = computed(() => {
                             </button>
                         </div>
                         <div v-else>
-                            <Link href="#"
+                            <Link :href="route('dashboard.class.study')"
                                 class="w-full py-2.5 px-4 rounded-xl bg-indigo-600 text-white font-semibold text-sm hover:bg-indigo-700 transition flex items-center justify-center gap-2 shadow-sm hover:shadow-indigo-200">
                             Lanjutkan Belajar
                             </Link>

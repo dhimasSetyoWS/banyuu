@@ -72,11 +72,26 @@ const isMobile = ref(false);
                 </div>
             </div>
             <!-- Link mobile -->
-            <div v-if="isMobile" class="md:hidden flex flex-col justify-center items-start space-y-3 pb-3">
+            <div v-if="isMobile" class="md:hidden flex flex-col justify-center items-start space-y-3 pb-3 border-b">
                 <template v-for="link in links">
-                    <Link :href="route(link.target)" class="text-md hover:text-slate-200 hover:bg-slate-800 w-full transition p-2"
+                    <Link :href="route(link.target)"
+                        class="text-md hover:text-slate-200 hover:bg-slate-800 w-full transition p-2"
                         :class="route().current(link.active) ? 'text-brand-600 font-bold' : 'text-slate-600 font-medium'">
                         {{ link.text }}</Link>
+                </template>
+                <div class="h-1 w-full bg-slate-900 rounded"></div>
+                <template v-if="!user">
+                    <Link :href="route('login')" class="text-md hover:text-slate-900 hover:bg-brand-600 w-full transition p-2 text-slate-600 font-medium">
+                        Masuk
+                    </Link>
+                    <Link :href="route('register')"
+                        class="text-md hover:text-slate-900 hover:bg-brand-600 w-full transition p-2 text-slate-600 font-medium">
+                        Daftar
+                    </Link>
+                </template>
+                <template v-else>
+                    <Link :href="user.role == 'teacher' ? route('teacher.dashboard') : route('dashboard')"
+                        class="text-sm font-semibold text-slate-600 hover:text-brand-600">Dashboard</Link>
                 </template>
             </div>
         </div>

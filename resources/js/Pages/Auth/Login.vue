@@ -21,7 +21,7 @@ const submit = () => {
                 title: 'Login Gagal!',
                 text: firstMessage || 'Periksa kembali email dan password anda.',
                 confirmButtonText: 'Coba Lagi',
-                confirmButtonColor: '#2563EB', // Sesuaikan warna dengan tema (Blue-600)
+                confirmButtonColor: '#4F39F6', // Sesuaikan warna dengan tema (Blue-600)
                 heightAuto: false // Fix agar tidak loncat di beberapa layout
             });
         }

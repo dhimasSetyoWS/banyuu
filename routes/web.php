@@ -37,6 +37,24 @@ Route::prefix('/dashboard')->middleware(['auth', 'verified', 'role:student'])->g
     Route::get('/class/detail-class', function () {
         return Inertia::render('Dashboard/Student/Class/DetailClass');
     })->name('dashboard.class.detail');
+    Route::get('/class/nama_class/study', function () {
+        return Inertia::render('Dashboard/Student/Class/Study/SessionClassList');
+    })->name('dashboard.class.study');
+    Route::get('/class/nama_class/study/session', function () {
+        return Inertia::render('Dashboard/Student/Class/Study/Session');
+    })->name('dashboard.class.study.show');
+    Route::get('/class/nama_class/study/session/exam', function () {
+        return Inertia::render('Dashboard/Student/Class/Study/Exam');
+    })->name('dashboard.class.study.show.exam');
+    Route::get('/class/nama_class/study/session/material', function () {
+        return Inertia::render('Dashboard/Student/Class/Study/Material');
+    })->name('dashboard.class.study.show.material');
+    Route::get('/class/nama_class/study/session/assignment', function () {
+        return Inertia::render('Dashboard/Student/Class/Study/Assignment');
+    })->name('dashboard.class.study.show.assignment');
+    Route::get('/class/nama_class/study/session/project', function () {
+        return Inertia::render('Dashboard/Student/Class/Study/Project');
+    })->name('dashboard.class.study.show.project');
 });
 
 // Teacher
@@ -154,6 +172,10 @@ Route::prefix('/dashboard')->middleware(['auth', 'verified'])->group(function ()
     Route::get('/assesment', function () {
         return Inertia::render('Dashboard/AssessmentList');
     })->name('dashboard.assessment.index');
+
+    Route::get('/profile', function() {
+        return Inertia::render("Auth/SettingProfile");
+    })->name('dashboard.profile');
 });
 require __DIR__ . '/auth.php';
 require __DIR__ . '/service.php';
