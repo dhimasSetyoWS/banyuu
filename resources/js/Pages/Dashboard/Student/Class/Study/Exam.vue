@@ -116,37 +116,23 @@ const jumpToQuestion = (index) => {
 const submitExam = () => {
     const unansweredCount = questions.value.filter((q, idx) => !isAnswered(idx)).length;
 
-    if (unansweredCount > 0) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Tidak bisa kumpul!',
-            text: 'Anda belum menjawab semua soal.',
-            confirmButtonText: 'Jawab Soal',
-            confirmButtonColor: '#4F39F6', // Sesuaikan warna dengan tema (Blue-600)
-            cancelButtonColor: '#EC2F37',
-            cancelButtonText: 'Batal kumpul',
-            heightAuto: false // Fix agar tidak loncat di beberapa layout
-        });
-        return
-    } else {
-        Swal.fire({
-            icon: 'info',
-            title: 'Yakin?',
-            text: 'Yakin ingin mengumpulkan jawaban anda?',
-            showCancelButton: true,
-            confirmButtonText: 'Kumpul',
-            confirmButtonColor: '#009966', // Sesuaikan warna dengan tema (Blue-600)
-            cancelButtonColor: '#EC2F37',
-            cancelButtonText: 'Batal kumpul',
-            heightAuto: false // Fix agar tidak loncat di beberapa layout
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Kirim Jawaban ke backend
-                alert("AWJAKWDHJKDW");
-            }
-        });
-        return;
-    }
+    Swal.fire({
+        icon: 'info',
+        title: 'Yakin?',
+        text: 'Yakin ingin mengumpulkan jawaban anda?',
+        showCancelButton: true,
+        confirmButtonText: 'Kumpul',
+        confirmButtonColor: '#009966', // Sesuaikan warna dengan tema (Blue-600)
+        cancelButtonColor: '#EC2F37',
+        cancelButtonText: 'Batal kumpul',
+        heightAuto: false // Fix agar tidak loncat di beberapa layout
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Kirim Jawaban ke backend
+            alert("AWJAKWDHJKDW");
+        }
+    });
+    return;
 
     console.log("Jawaban yang dikirim:", questions.value);
     alert("Ujian berhasil dikumpulkan! Silakan cek console untuk melihat payload data.");
