@@ -38,9 +38,9 @@ import Footer from '@/Components/Footer.vue';
                                 </svg>
                             </div>
                             <div>
-                                <p class="text-sm font-bold text-slate-900">EduLarn HQ</p>
+                                <p class="text-sm font-bold text-slate-900">Banua Kursus</p>
                                 <p class="text-sm text-slate-500 leading-relaxed mt-1">
-                                    Jl. Pendidikan No. 123, <br>Jakarta Selatan, Indonesia 12430
+                                    Jl. Tadulako No. 35, <br>Besusu Tengah, Kec. Palu Timur. Kota Palu, Sulawesi Tengah 94112
                                 </p>
                             </div>
                         </div>
@@ -56,7 +56,7 @@ import Footer from '@/Components/Footer.vue';
                             <div>
                                 <p class="text-sm font-bold text-slate-900">Email</p>
                                 <a href="mailto:support@edularn.id"
-                                    class="text-sm text-slate-500 hover:text-brand-600 transition">support@edularn.id</a>
+                                    class="text-sm text-slate-500 hover:text-brand-600 transition">support@banuakursus.com</a>
                             </div>
                         </div>
 
@@ -94,7 +94,7 @@ import Footer from '@/Components/Footer.vue';
                 <div
                     class="h-64 bg-slate-200 rounded-2xl overflow-hidden border border-slate-200 shadow-sm relative group cursor-pointer">
                     <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.2965613862283!2d106.80211757499039!3d-6.224571993763486!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f14d76472659%3A0x8670189467771746!2sGelora%20Bung%20Karno!5e0!3m2!1sen!2sid!4v1709199999999!5m2!1sen!2sid"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.333780841165!2d119.87664550000001!3d-0.8929559999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d8bedc0398bbf61%3A0x6b38cb63e4e092c!2sTechno%20Celebes!5e0!3m2!1sid!2sid!4v1772094797056!5m2!1sid!2sid"
                         width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade" class="map-grayscale"></iframe>
                 </div>
